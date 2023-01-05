@@ -10,7 +10,7 @@ type AccessTokenResponse = {
   scope: string
 }
 
-export type AccessTokenResponseError = {
+type AccessTokenResponseError = {
   error: string
   error_description: string
 }
