@@ -1,4 +1,4 @@
-name: Generate README.md
+name: Generate
 
 on:
   push:
@@ -48,7 +48,7 @@ jobs:
       - name: Install node dependencies
         run: yarn --frozen-lockfile
 
-      - name: Generate README.md
+      - name: Generate QR Code
         run: yarn start
         
       - name: Push changes

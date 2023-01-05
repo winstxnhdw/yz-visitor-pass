@@ -40,5 +40,5 @@ jobs:
       - name: Run linter
         run: yarn lint
 
-      - name: Generate README.md
+      - name: Generate QR Code
         run: yarn start
