@@ -1,5 +1,16 @@
 import { config } from '@/config'
-import type { QRResponse } from '@/types'
+
+export type QRResponse = {
+  status: string
+  data: [
+    {
+      host: [object]
+      qr_image: string
+      tenant_floor: string
+      tenant_name: string
+    }
+  ]
+}
 
 export const generate_quick_response_code = async (access_token: string) => {
   const qr_endpoint = `${

@@ -1,5 +1,19 @@
 import { config } from '@/config'
-import type { AccessTokenResponse, AccessTokenResponseError } from '@/types'
+
+export type AccessTokenResponse = {
+  access_token: string
+  expires_in: number
+  refresh_expires_in: number
+  refresh_token: string
+  token_type: string
+  session_state: string
+  scope: string
+}
+
+export type AccessTokenResponseError = {
+  error: string
+  error_description: string
+}
 
 export const generate_access_token = async () => {
   const access_token_request = await fetch(`${config.HOST_URL}/auth/realms/Alice/protocol/openid-connect/token`, {
