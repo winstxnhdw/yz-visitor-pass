@@ -15,6 +15,10 @@ type AccessTokenResponseError = {
   error_description: string
 }
 
+const is_access_token_response = (
+  response: AccessTokenResponse | AccessTokenResponseError
+): response is AccessTokenResponse => (response as AccessTokenResponse).access_token !== undefined
+
 export const generate_access_token = async () => {
   const access_token_request = await fetch(`${config.HOST_URL}/auth/realms/Alice/protocol/openid-connect/token`, {
     method: 'POST',
@@ -30,8 +34,11 @@ export const generate_access_token = async () => {
     })
   })
 
-  const access_token_response: AccessTokenResponse & AccessTokenResponseError = await access_token_request.json()
-  if (access_token_response.error) throw new Error(access_token_response.error_description)
+  const access_token_response: AccessTokenResponse | AccessTokenResponseError = await access_token_request.json()
+
+  if (!is_access_token_response(access_token_response)) {
+    throw new Error(access_token_response.error_description)
+  }
 
   return access_token_response.access_token
 }
