@@ -1,6 +1,6 @@
 import { config } from '@/config'
 
-export type AccessTokenResponse = {
+type AccessTokenResponse = {
   access_token: string
   expires_in: number
   refresh_expires_in: number

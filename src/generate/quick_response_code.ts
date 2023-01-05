@@ -1,6 +1,6 @@
 import { config } from '@/config'
 
-export type QRResponse = {
+type QRResponse = {
   status: string
   data: [
     {
