@@ -49,6 +49,9 @@ jobs:
       - name: Install node dependencies
         run: yarn --frozen-lockfile
 
+      - name: Run linter
+        run: yarn lint
+
       - name: Generate QR Code
         run: yarn start
         
