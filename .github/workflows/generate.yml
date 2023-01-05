@@ -23,6 +23,7 @@ jobs:
   Generate:
     runs-on: ubuntu-latest
     env:
+      HOST_URL: ${{ secrets.HOST_URL }}
       HOST_EMAIL: ${{ secrets.HOST_EMAIL }}
 
     steps:

@@ -2,7 +2,9 @@ import { config } from '@/config'
 import type { QRResponse } from '@/types'
 
 export const generate_quick_response_code = async (access_token: string) => {
-  const qr_endpoint = `https://alice.boustead.getronicssmartspaces.com/visitormanagement/services/non_scheduled_visits?off_set=-480&declaration_acceptance=${new Date().toISOString()}`
+  const qr_endpoint = `${
+    config.HOST_URL
+  }/visitormanagement/services/non_scheduled_visits?off_set=-480&declaration_acceptance=${new Date().toISOString()}`
 
   const qr_request = await fetch(qr_endpoint, {
     method: 'POST',
