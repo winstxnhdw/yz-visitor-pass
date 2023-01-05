@@ -32,5 +32,5 @@ export const generate_quick_response_code = async (access_token: string) => {
   })
 
   const qr_response: QRResponse = await qr_request.json()
-  return qr_response.data[0].qr_image.split('\n').slice(1)
+  return qr_response.data[0].qr_image
 }

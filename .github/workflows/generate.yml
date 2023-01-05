@@ -2,9 +2,11 @@ name: Generate README.md
 
 on:
   push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+    paths:
+      - 'src/**'
+      - '.github/workflows/main.yml'
+      - 'package.json'
+      - 'tsconfig.json'
   schedule:
     #         ┌───────────── minute (0 - 59)
     #         │ ┌───────────── hour (0 - 23)
@@ -47,12 +49,12 @@ jobs:
         run: yarn --frozen-lockfile
 
       - name: Generate README.md
-        run: yarn run
+        run: yarn start
         
       - name: Push changes
         run: |
           git config user.email "${{ env.HOST_EMAIL }}"
-          git config user.name "README-bot"
-          git add README.md
-          git commit -m "docs: update QR code" || exit 0
+          git config user.name "GitHub Actions"
+          git add resources/qr_code.svg
+          git commit -m "chore(resources): update QR code" || exit 0
           git push
