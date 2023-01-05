@@ -1,0 +1,58 @@
+name: Generate README.md
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  schedule:
+    #         ┌───────────── minute (0 - 59)
+    #         │ ┌───────────── hour (0 - 23)
+    #         │ │ ┌───────────── day of the month (1 - 31)
+    #         │ │ │ ┌───────────── month (1 - 12 or JAN-DEC)
+    #         │ │ │ │ ┌───────────── day of the week (0 - 6 or SUN-SAT)
+    #         │ │ │ │ │
+    #         │ │ │ │ │
+    #         │ │ │ │ │
+    #         * * * * *
+    - cron: '30 8 * * *'
+
+jobs:
+  Generate:
+    runs-on: ubuntu-latest
+    env:
+      HOST_EMAIL: ${{ secrets.HOST_EMAIL }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: 'Cache node_modules'
+        uses: actions/cache@v3
+        env:
+          CACHE_NAME: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.CACHE_NAME }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Install node dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Generate README.md
+        run: yarn run
+        
+      - name: Push changes
+        run: |
+          git config user.email "${{ env.HOST_EMAIL }}"
+          git config user.name "README-bot"
+          git add README.md
+          git commit -m "docs: update QR code" || exit 0
+          git push

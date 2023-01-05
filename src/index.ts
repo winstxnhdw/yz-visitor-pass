@@ -1,38 +1,12 @@
-import type { Handler, APIGatewayProxyResultV2 } from 'aws-lambda'
+import { writeFile } from 'fs/promises'
+import { generate_access_token } from '@/generate_access_token'
+import { generate_quick_response_code } from '@/generate_quick_response_code'
 
-type LambdaFunctionURLEvent = {
-  version: string
-  routeKey: string
-  rawPath: string
-  rawQueryString: string
-  headers: {
-    host: string
-  }
-  queryStringParameters?: {
-    [key: string]: unknown
-  }
-  requestContext: {
-    accountId: string
-    apiId: string
-    domainName: string
-    domainPrefix: string
-    http: {
-      method: 'GET' | 'POST'
-      path: string
-      protocol: string
-      sourceIp: string
-      userAgent: string | null
-    }
-    requestId: string
-    routeKey: string
-    stage: string
-    time: string
-    timeEpoch: number
-  }
-  body?: string
-  isBase64Encoded: false
+async function main() {
+  const access_token = await generate_access_token()
+  const quick_response_code = await generate_quick_response_code(access_token)
+  const readme = `# yz-visitor-pass\n\n<div align="center">${quick_response_code}</div>`
+  await writeFile('README.md', readme).catch(console.error)
 }
 
-export const handler: Handler = async (event: LambdaFunctionURLEvent): Promise<APIGatewayProxyResultV2> => {
-  return { statusCode: 200, body: event.body }
-}
+main()
