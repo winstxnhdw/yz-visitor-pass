@@ -9,7 +9,7 @@ export const generate_quick_response_code = async (access_token: string) => {
   const qr_request = await fetch(qr_endpoint, {
     method: 'POST',
     headers: {
-      'content-type': 'application/json',
+      'Content-Type': 'application/json',
       authorization: `Bearer ${access_token}`
     },
     body: JSON.stringify({
