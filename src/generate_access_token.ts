@@ -1,4 +1,4 @@
-import type { AccessTokenResponse, AccessTokenResponseError } from '@/types/index'
+import type { AccessTokenResponse, AccessTokenResponseError } from '@/types'
 
 export const generate_access_token = async () => {
   const access_token_request = await fetch(
