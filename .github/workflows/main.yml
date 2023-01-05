@@ -1,4 +1,4 @@
-name: Test
+name: Generate QR Code
 
 on:
   push:
@@ -7,9 +7,20 @@ on:
       - '.github/workflows/main.yml'
       - 'package.json'
       - 'tsconfig.json'
+  schedule:
+    #         ┌───────────── minute (0 - 59)
+    #         │ ┌───────────── hour (0 - 23)
+    #         │ │ ┌───────────── day of the month (1 - 31)
+    #         │ │ │ ┌───────────── month (1 - 12 or JAN-DEC)
+    #         │ │ │ │ ┌───────────── day of the week (0 - 6 or SUN-SAT)
+    #         │ │ │ │ │
+    #         │ │ │ │ │
+    #         │ │ │ │ │
+    #         * * * * *
+    - cron: '30 8 * * *'
 
 jobs:
-  Test:
+  Generate:
     runs-on: ubuntu-latest
     env:
       HOST_URL: ${{ secrets.HOST_URL }}
@@ -38,8 +49,13 @@ jobs:
       - name: Install node dependencies
         run: yarn --frozen-lockfile
 
-      - name: Run linter
-        run: yarn lint
-
       - name: Generate QR Code
         run: yarn start
+        
+      - name: Push changes
+        run: |
+          git config user.email "${{ env.HOST_EMAIL }}"
+          git config user.name "GitHub Actions"
+          git add resources/qr_code.svg
+          git commit -m "chore(resources): update QR code" || exit 0
+          git push
