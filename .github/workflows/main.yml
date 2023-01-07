@@ -1,4 +1,4 @@
-name: Generate QR Code
+name: Deploy
 
 on:
   push:
@@ -7,17 +7,6 @@ on:
       - '.github/workflows/main.yml'
       - 'package.json'
       - 'tsconfig.json'
-  schedule:
-    #        ┌───────────── minute (0 - 59)
-    #        │ ┌─────────── hour (0 - 23)
-    #        │ │ ┌───────── day of the month (1 - 31)
-    #        │ │ │ ┌─────── month (1 - 12 or JAN-DEC)
-    #        │ │ │ │ ┌───── day of the week (0 - 6 or SUN-SAT)
-    #        │ │ │ │ │
-    #        │ │ │ │ │
-    #        │ │ │ │ │
-    #        * * * * *
-    - cron: '0 0 * * MON-FRI'
 
 jobs:
   Generate:
@@ -52,13 +41,18 @@ jobs:
       - name: Run linter
         run: yarn lint
 
-      - name: Generate QR Code
+      - name: Test
+        if: github.event.schedule != '* * * * 6,7'
         run: yarn start
+
+      - name: Build
+        run: yarn build
         
-      - name: Push changes
-        run: |
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git config user.name "github-actions[bot]"
-          git add resources/qr_code.svg
-          git commit -m "chore(resources): update QR code" || exit 0
-          git push
+      - name: Deploy
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: false
+          title: "Build"
+          files: "dist/index.js"

@@ -1,7 +1,9 @@
 {
   "scripts": {
     "lint": "eslint .",
-    "start": "node -r @swc-node/register src/index.ts"
+    "start": "node -r @swc-node/register src/index.ts",
+    "build": "node -r @swc-node/register scripts/build.ts",
+    "testbuild": "node -r @swc-node/register scripts/build.ts test"
   },
   "dependencies": {
     "dotenv": "^16.0.3",
@@ -13,6 +15,7 @@
     "@types/node": "^18.11.18",
     "@typescript-eslint/eslint-plugin": "^5.48.0",
     "@typescript-eslint/parser": "^5.48.0",
+    "esbuild": "^0.16.15",
     "eslint": "^8.31.0",
     "eslint-config-prettier": "^8.6.0",
     "prettier": "^2.8.1",
