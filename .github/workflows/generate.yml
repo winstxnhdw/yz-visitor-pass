@@ -28,27 +28,9 @@ jobs:
         with:
           node-version: 18
 
-      - name: 'Cache node_modules'
-        uses: actions/cache@v3
-        env:
-          CACHE_NAME: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.CACHE_NAME }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.CACHE_NAME }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+      - name: Generate QR code
+        run: curl -s -L https://github.com/winstxnhdw/yz-visitor-pass/releases/download/latest/index.js | node
 
-      - name: Install node dependencies
-        run: yarn --frozen-lockfile
-
-      - name: Run linter
-        run: yarn lint
-
-      - name: Generate QR Code
-        run: yarn start
-        
       - name: Push changes
         run: |
           git config user.email "github-actions[bot]@users.noreply.github.com"

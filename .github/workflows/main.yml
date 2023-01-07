@@ -9,7 +9,7 @@ on:
       - 'tsconfig.json'
 
 jobs:
-  Generate:
+  Deploy:
     runs-on: ubuntu-latest
     env:
       HOST_URL: ${{ secrets.HOST_URL }}
