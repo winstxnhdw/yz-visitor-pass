@@ -27,7 +27,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: latest
 
       - name: Generate QR code
         run: curl -s -L https://github.com/winstxnhdw/yz-visitor-pass/releases/download/latest/index.js | node
