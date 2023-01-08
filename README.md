@@ -8,7 +8,7 @@
 </p>
 
 <div align="center">
-    <img src="resources/qr_code.svg" />
+    <img src="resources/qr_code.svg" width="250" height="250" />
 </div>
 
 ## Installation
