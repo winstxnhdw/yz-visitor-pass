@@ -1,7 +1,7 @@
 # yz-visitor-pass
 
-![main.yml](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/main.yml/badge.svg)
-![generate.yml](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/generate.yml/badge.svg)
+[![main.yml](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/main.yml/badge.svg)](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/main.yml)
+[![generate.yml](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/generate.yml/badge.svg)](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/generate.yml)
 
 <p align="center">
     <b>100% Automated. Forever.</b>
