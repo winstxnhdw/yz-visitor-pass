@@ -34,8 +34,9 @@ jobs:
 
       - name: Push changes
         run: |
+          [[ "$(git log -1 --format=%s)" =~ "chore(resources): update QR code" ]] && AMEND_FLAG=--amend
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
           git add resources/qr_code.svg
-          git commit -m "chore(resources): update QR code" || exit 0
-          git push
+          git commit -m "chore(resources): update QR code" $AMEND_FLAG || exit 0
+          git push --force
