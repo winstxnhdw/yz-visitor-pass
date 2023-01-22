@@ -26,15 +26,12 @@ export const generate_quick_response_code = async (access_token: string) => {
     body: JSON.stringify({
       visits: [
         {
-          about: 'Work',
-          company: 'Yoozoo',
-          email: 'admin@yoozoo.com',
-          first_name: 'admin',
+          about: '',
+          company: '',
+          email: '',
           host: {
             mail: config.HOST_EMAIL
           },
-          last_name: 'admin',
-          phone: '12345678',
           tenant_floor: '9;Front;NorthTower',
           tenant_id: 'cn=Youzu -Singapore- Pte Ltd,ou=Tenants,cn=Alice,o=Boustead,dc=getronettes,dc=com',
           tenant_name: 'Youzu -Singapore- Pte Ltd',
