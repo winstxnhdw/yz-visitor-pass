@@ -2,6 +2,7 @@
 
 [![main.yml](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/main.yml/badge.svg)](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/main.yml)
 [![generate.yml](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/generate.yml/badge.svg)](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/generate.yml)
+[![CodeQL](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/github-code-scanning/codeql)
 
 <p align="center">
     <b>100% Automated. Forever.</b>
