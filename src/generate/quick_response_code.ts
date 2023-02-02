@@ -29,7 +29,7 @@ export const generate_quick_response_code = async (access_token: string) => {
           about: 'Work',
           company: 'YOOZOO',
           email: 'admin@yoozoo.com',
-          first_name: 'Yoozoo',
+          first_name: 'Youzu',
           host: {
             mail: config.HOST_EMAIL
           },
