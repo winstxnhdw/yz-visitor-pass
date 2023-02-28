@@ -17,10 +17,10 @@ on:
 jobs:
   Generate:
     runs-on: ubuntu-latest
-    
+
     permissions:
       contents: write
-      
+
     env:
       HOST_URL: ${{ secrets.HOST_URL }}
       HOST_EMAIL: ${{ secrets.HOST_EMAIL }}
@@ -33,7 +33,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 19.7.0
 
       - name: Generate QR code
         run: curl -s -L https://github.com/winstxnhdw/yz-visitor-pass/releases/download/latest/index.js | node
