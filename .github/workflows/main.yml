@@ -14,7 +14,8 @@ jobs:
   Deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -30,7 +31,7 @@ jobs:
 
       - name: Build
         run: yarn build
-        
+
       - name: Deploy
         env:
           GH_TOKEN: ${{ github.token }}
