@@ -5,14 +5,14 @@ on:
   schedule:
     #        ┌──────────────── minute (0 - 59)
     #        │ ┌────────────── hour (0 - 23)
-    #        │ │    ┌───────── day of the month (1 - 31)
-    #        │ │    │ ┌─────── month (1 - 12 or JAN-DEC)
-    #        │ │    │ │ ┌───── day of the week (0 - 6 or SUN-SAT)
-    #        │ │    │ │ │
-    #        │ │    │ │ │
-    #        │ │    │ │ │
-    #        * *    * * *
-    - cron: '0 0-12 * * MON-FRI'
+    #        │ │ ┌──────────── day of the month (1 - 31)
+    #        │ │ │ ┌────────── month (1 - 12 or JAN-DEC)
+    #        │ │ │ │ ┌──────── day of the week (0 - 6 or SUN-SAT)
+    #        │ │ │ │ │
+    #        │ │ │ │ │
+    #        │ │ │ │ │
+    #        * * * * *
+    - cron: '0 0 * * MON-FRI'
 
 jobs:
   Generate:
@@ -29,7 +29,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          fetch-depth: 2
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -37,13 +37,15 @@ jobs:
           node-version: 19.7.0
 
       - name: Generate QR code
-        run: curl -s -L https://github.com/winstxnhdw/yz-visitor-pass/releases/download/latest/index.js | node
-
-      - name: Push changes
         run: |
-          [[ "$(git log -1 --format=%s)" =~ "chore(resources): update QR code" ]] && AMEND_FLAG=--amend
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
-          git add resources/qr_code.svg
-          git commit -m "chore(resources): update QR code" $AMEND_FLAG
-          git push --force-with-lease
+
+          for i in 'seq 5'
+          do
+            sed -i "8s,/tree/[^\"]*,/tree/$(git rev-parse HEAD)," README.md
+            curl -s -L https://github.com/winstxnhdw/yz-visitor-pass/releases/download/latest/index.js | node
+            git add resources/qr_code.svg README.md
+            git commit -m "chore(resources): update QR code"
+            git push
+          done
