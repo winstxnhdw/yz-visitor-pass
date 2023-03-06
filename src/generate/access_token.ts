@@ -1,6 +1,8 @@
 import { config } from '@/config'
 
-type AccessTokenResponse = {
+type AccessTokenResponse = AccessTokenResponseSuccess | AccessTokenResponseError
+
+interface AccessTokenResponseSuccess {
   access_token: string
   expires_in: number
   refresh_expires_in: number
@@ -10,16 +12,15 @@ type AccessTokenResponse = {
   scope: string
 }
 
-type AccessTokenResponseError = {
+interface AccessTokenResponseError {
   error: string
   error_description: string
 }
 
-const is_access_token_response = (
-  response: AccessTokenResponse | AccessTokenResponseError
-): response is AccessTokenResponse => (response as AccessTokenResponse).access_token !== undefined
+const is_access_token_response = (response: AccessTokenResponse): response is AccessTokenResponseSuccess =>
+  (response as AccessTokenResponseSuccess).access_token !== undefined
 
-export const generate_access_token = async () => {
+const generate_access_token_request = async (): Promise<AccessTokenResponse> => {
   const access_token_request = await fetch(`${config.HOST_URL}/auth/realms/Alice/protocol/openid-connect/token`, {
     method: 'POST',
     headers: {
@@ -34,7 +35,11 @@ export const generate_access_token = async () => {
     })
   })
 
-  const access_token_response: AccessTokenResponse | AccessTokenResponseError = await access_token_request.json()
+  return access_token_request.json()
+}
+
+export const generate_access_token = async (): Promise<string> => {
+  const access_token_response = await generate_access_token_request()
 
   if (!is_access_token_response(access_token_response)) {
     throw new Error(access_token_response.error_description)

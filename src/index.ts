@@ -1,5 +1,5 @@
-import { writeFile } from 'fs/promises'
 import { generate_access_token, generate_quick_response_code } from '@/generate'
+import { writeFile } from 'fs/promises'
 
 async function main() {
   const access_token = await generate_access_token()

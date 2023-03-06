@@ -1,6 +1,6 @@
 import { config } from '@/config'
 
-type QRResponse = {
+interface QRResponse {
   status: string
   data: [
     {
@@ -12,7 +12,7 @@ type QRResponse = {
   ]
 }
 
-export const generate_quick_response_code = async (access_token: string) => {
+const generate_quick_response_response = async (access_token: string): Promise<QRResponse> => {
   const qr_endpoint = `${
     config.HOST_URL
   }/visitormanagement/services/non_scheduled_visits?off_set=-480&declaration_acceptance=${new Date().toISOString()}`
@@ -26,15 +26,15 @@ export const generate_quick_response_code = async (access_token: string) => {
     body: JSON.stringify({
       visits: [
         {
-          about: 'Work',
-          company: 'YOOZOO',
-          email: 'admin@yoozoo.com',
-          first_name: 'Youzu',
+          about: '',
+          company: '',
+          email: '',
+          first_name: '',
           host: {
             mail: config.HOST_EMAIL
           },
-          last_name: 'Admin',
-          phone: '99999999',
+          last_name: '',
+          phone: '',
           tenant_floor: '9;Front;NorthTower',
           tenant_id: 'cn=Youzu -Singapore- Pte Ltd,ou=Tenants,cn=Alice,o=Boustead,dc=getronettes,dc=com',
           tenant_name: 'Youzu -Singapore- Pte Ltd',
@@ -44,6 +44,10 @@ export const generate_quick_response_code = async (access_token: string) => {
     })
   })
 
-  const qr_response: QRResponse = await qr_request.json()
-  return qr_response.data[0].qr_image
+  return qr_request.json()
+}
+
+export const generate_quick_response_code = async (access_token: string): Promise<string> => {
+  const response = await generate_quick_response_response(access_token)
+  return response.data[0].qr_image
 }
