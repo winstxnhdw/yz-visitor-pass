@@ -24,6 +24,7 @@ jobs:
     env:
       HOST_URL: ${{ secrets.HOST_URL }}
       HOST_EMAIL: ${{ secrets.HOST_EMAIL }}
+      REPOSITORY_NAME: ${{ github.event.repository.name }}
 
     steps:
       - name: Checkout repository
@@ -45,8 +46,8 @@ jobs:
         run: |
           for i in $(seq 5)
           do
-            sed -i "8s,/tree/[^\"]*,/tree/$(git rev-parse HEAD)," README.md
-            curl -s -L https://github.com/winstxnhdw/yz-visitor-pass/releases/download/latest/index.js | node
+            sed -i "8s,/tree/[^\"]*,/tree/$(git rev-parse HEAD)#$REPOSITORY_NAME," README.md
+            curl -s -L https://github.com/winstxnhdw/$REPOSITORY_NAME/releases/download/latest/index.js | node
             git add resources/qr_code.svg README.md
             git commit -m "chore(resources): update QR code"
             git push
