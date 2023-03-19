@@ -43,6 +43,6 @@ jobs:
           RELEASE_TITLE: Build
           RELEASE_ASSET: dist/index.js
         run: |
-          gh release delete ${{ env.RELEASE_TAG }} --cleanup-tag -y || true
-          gh release create ${{ env.RELEASE_TAG }} -t '${{ env.RELEASE_TITLE }}'
+          gh release delete ${{ env.RELEASE_TAG }} -y || true
+          gh release create ${{ env.RELEASE_TAG }} -t '${{ env.RELEASE_TITLE }}' || true
           gh release upload ${{ env.RELEASE_TAG }} ${{ env.RELEASE_ASSET }} --clobber
