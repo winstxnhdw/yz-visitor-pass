@@ -44,7 +44,7 @@ jobs:
 
       - name: Generate QR code
         run: |
-          for i in $(seq 3)
+          for i in $(seq 2)
           do
             sed -i "8s,/tree/[^\"]*,/tree/$(git rev-parse HEAD)#$REPOSITORY_NAME," README.md
             curl -s -L https://github.com/winstxnhdw/$REPOSITORY_NAME/releases/download/latest/index.js | node
