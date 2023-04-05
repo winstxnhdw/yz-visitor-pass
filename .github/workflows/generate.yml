@@ -24,7 +24,6 @@ jobs:
   generate:
     runs-on: ubuntu-latest
 
-
     env:
       REPOSITORY_NAME: ${{ github.event.repository.name }}
       HOST_URL: ${{ secrets.HOST_URL }}
