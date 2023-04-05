@@ -8,12 +8,12 @@ on:
       - 'package.json'
       - 'tsconfig.json'
 
+permissions:
+  contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
 
     steps:
       - name: Checkout repository

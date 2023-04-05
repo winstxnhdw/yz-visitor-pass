@@ -17,12 +17,13 @@ on:
     #        * * * * *
     - cron: '0 0 * * MON-FRI'
 
+permissions:
+  contents: write
+
 jobs:
   generate:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write
 
     env:
       REPOSITORY_NAME: ${{ github.event.repository.name }}
