@@ -1,6 +1,9 @@
 name: Generate QR Code
 
 on:
+  push:
+    paths:
+      - '.github/workflows/generate.yml'
   workflow_dispatch:
   schedule:
     #        ┌──────────────── minute (0 - 59)
@@ -29,8 +32,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
