@@ -18,7 +18,7 @@ on:
     - cron: '0 0 * * MON-FRI'
 
 jobs:
-  Generate:
+  generate:
     runs-on: ubuntu-latest
 
     permissions:
