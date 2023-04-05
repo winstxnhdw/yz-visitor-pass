@@ -9,7 +9,7 @@ on:
       - 'tsconfig.json'
 
 jobs:
-  Deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     permissions:
