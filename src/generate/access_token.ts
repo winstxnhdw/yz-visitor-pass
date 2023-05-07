@@ -17,8 +17,9 @@ interface AccessTokenResponseError {
   error_description: string
 }
 
-const is_access_token_response = (response: AccessTokenResponse): response is AccessTokenResponseSuccess =>
-  (response as AccessTokenResponseSuccess).access_token !== undefined
+const is_access_token_response = (response: AccessTokenResponse): response is AccessTokenResponseSuccess => {
+  return 'access_token' in response
+}
 
 const generate_access_token_request = async (): Promise<AccessTokenResponse> => {
   const access_token_request = await fetch(`${config.HOST_URL}/auth/realms/Alice/protocol/openid-connect/token`, {
@@ -35,7 +36,7 @@ const generate_access_token_request = async (): Promise<AccessTokenResponse> => 
     })
   })
 
-  return access_token_request.json()
+  return access_token_request.json() as Promise<AccessTokenResponse>
 }
 
 export const generate_access_token = async (): Promise<string> => {

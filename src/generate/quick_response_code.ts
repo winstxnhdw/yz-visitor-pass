@@ -44,7 +44,7 @@ const generate_quick_response_response = async (access_token: string): Promise<Q
     })
   })
 
-  return qr_request.json()
+  return qr_request.json() as Promise<QRResponse>
 }
 
 export const generate_quick_response_code = async (access_token: string): Promise<string> => {

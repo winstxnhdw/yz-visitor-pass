@@ -7,4 +7,4 @@ async function main() {
   await writeFile('resources/qr_code.svg', quick_response_code).catch(console.error)
 }
 
-main()
+void main()
