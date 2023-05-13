@@ -2,8 +2,7 @@ name: Generate QR Code
 
 on:
   push:
-    paths:
-      - '.github/workflows/generate.yml'
+    paths: [.github/workflows/generate.yml]
   workflow_dispatch:
   schedule:
     #        ┌──────────────── minute (0 - 59)
