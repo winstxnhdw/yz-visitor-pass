@@ -2,13 +2,12 @@ name: Deploy
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
     paths:
       - 'src/**'
-      - '.github/workflows/main.yml'
-      - 'package.json'
-      - 'tsconfig.json'
+      - .github/workflows/main.yml
+      - package.json
+      - tsconfig.json
 
 permissions:
   contents: write
