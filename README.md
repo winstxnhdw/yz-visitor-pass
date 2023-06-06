@@ -24,3 +24,31 @@ yarn
 ```bash
 yarn start
 ```
+
+## Pipeline Architecture
+
+The `Deploy` and `Generate QR Code` Actions are separated to eliminate the redundant step of re-installing/caching dependencies. This separation effectively reduces the time required to generate a Quick Response code. The pipeline architecture can be illustrated with the following.
+
+```mermaid
+flowchart TD
+    Developer(Developer)
+    GitHub(GitHub)
+    QR[resources/qr_code.svg]
+    README[README.md]
+
+    subgraph Pipeline
+        Deploy(Deploy)
+        Generate(Generate QR Code)
+        Release[(Release)]
+    end
+
+    Developer  --> |Commit| GitHub
+    GitHub --> |Trigger| Deploy
+
+    Deploy --> |Build| Release
+    Release -. Pull Minified<br>JavaScript .-> Generate
+
+    Generate <-. Daily Job fa:fa-spinner .-> Generate
+    Generate --> |Update Image| QR
+    Generate --> |Update URL| README
+```
