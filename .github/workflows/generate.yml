@@ -22,12 +22,7 @@ permissions:
 jobs:
   generate:
     runs-on: ubuntu-latest
-
-    env:
-      REPOSITORY_NAME: ${{ github.event.repository.name }}
-      HOST_URL: ${{ secrets.HOST_URL }}
-      HOST_EMAIL: ${{ secrets.HOST_EMAIL }}
-
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -43,9 +38,13 @@ jobs:
           git config user.name "github-actions[bot]"
 
       - name: Generate QR code
+        env:
+          HOST_URL: ${{ secrets.HOST_URL }}
+          HOST_EMAIL: ${{ secrets.HOST_EMAIL }}
+          REPOSITORY_NAME: ${{ github.event.repository.name }}
         run: |
           sed -i "$(grep -n -m 1 'Go to previous QR Code' README.md | cut -d: -f1)s,/tree/[^\"]*,/tree/$(git rev-parse HEAD)#$REPOSITORY_NAME," README.md
-          curl -s -L https://github.com/winstxnhdw/$REPOSITORY_NAME/releases/download/latest/index.js | node
+          curl -s -L https://github.com/$GITHUB_REPOSITORY_OWNER/$REPOSITORY_NAME/releases/download/latest/index.js | node
           git add resources/qr_code.svg README.md
           git commit -m "chore(resources): update QR code"
           git push
