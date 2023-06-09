@@ -44,11 +44,8 @@ jobs:
 
       - name: Generate QR code
         run: |
-          for i in $(seq 2)
-          do
-            sed -i "$(grep -n -m 1 'Go to previous QR Code' README.md | cut -d: -f1)s,/tree/[^\"]*,/tree/$(git rev-parse HEAD)#$REPOSITORY_NAME," README.md
-            curl -s -L https://github.com/winstxnhdw/$REPOSITORY_NAME/releases/download/latest/index.js | node
-            git add resources/qr_code.svg README.md
-            git commit -m "chore(resources): update QR code"
-            git push
-          done
+          sed -i "$(grep -n -m 1 'Go to previous QR Code' README.md | cut -d: -f1)s,/tree/[^\"]*,/tree/$(git rev-parse HEAD)#$REPOSITORY_NAME," README.md
+          curl -s -L https://github.com/winstxnhdw/$REPOSITORY_NAME/releases/download/latest/index.js | node
+          git add resources/qr_code.svg README.md
+          git commit -m "chore(resources): update QR code"
+          git push
