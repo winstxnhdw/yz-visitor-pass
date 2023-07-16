@@ -1,0 +1,44 @@
+name: Format
+
+on:
+  push:
+    paths:
+      - src/**
+      - .github/workflows/formatter.yml
+
+permissions:
+  contents: write
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: latest
+          cache: yarn
+
+      - name: Install node dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Fix lints
+        run: yarn lint --fix
+
+      - name: Format with Prettier
+        run: yarn prettier .
+
+      - name: Set Git config
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+
+      - name: Commit changes
+        run: |
+          git add .
+          git commit -m "style: sort Python imports" | true
+          git push

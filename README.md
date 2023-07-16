@@ -2,6 +2,7 @@
 
 [![main.yml](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/main.yml/badge.svg)](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/main.yml)
 [![generate.yml](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/generate.yml/badge.svg)](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/generate.yml)
+[![formatter.yml](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/formatter.yml/badge.svg)](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/formatter.yml)
 [![dependabot.yml](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/dependabot.yml/badge.svg)](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/dependabot.yml)
 [![CodeQL](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/github-code-scanning/codeql)
 
