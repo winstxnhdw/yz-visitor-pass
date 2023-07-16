@@ -30,7 +30,7 @@ jobs:
         run: yarn lint --fix
 
       - name: Format with Prettier
-        run: yarn prettier --loglevel warn .
+        run: yarn prettier --write src
 
       - name: Set Git config
         run: |
@@ -40,5 +40,5 @@ jobs:
       - name: Commit changes
         run: |
           git add .
-          git commit -m "style: sort Python imports" | true
+          git commit -m "style: format scripts" | true
           git push
