@@ -30,7 +30,7 @@ jobs:
         run: yarn lint --fix
 
       - name: Format with Prettier
-        run: yarn prettier .
+        run: yarn prettier --loglevel warn .
 
       - name: Set Git config
         run: |
