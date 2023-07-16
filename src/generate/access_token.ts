@@ -25,15 +25,15 @@ const generate_access_token_request = async (): Promise<AccessTokenResponse> => 
   const access_token_request = await fetch(`${config.HOST_URL}/auth/realms/Alice/protocol/openid-connect/token`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: new URLSearchParams({
       grant_type: 'password',
       username: 'kiosk@alice.boustead.sg',
       password: 'password',
       client_id: 'vms-client',
-      client_secret: 'dc312558-304a-4216-aa55-840824f7c95a'
-    })
+      client_secret: 'dc312558-304a-4216-aa55-840824f7c95a',
+    }),
   })
 
   return access_token_request.json() as Promise<AccessTokenResponse>

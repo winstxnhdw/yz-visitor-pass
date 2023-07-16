@@ -8,7 +8,7 @@ interface QRResponse {
       qr_image: string
       tenant_floor: string
       tenant_name: string
-    }
+    },
   ]
 }
 
@@ -21,7 +21,7 @@ const generate_quick_response_response = async (access_token: string): Promise<Q
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      authorization: `Bearer ${access_token}`
+      authorization: `Bearer ${access_token}`,
     },
     body: JSON.stringify({
       visits: [
@@ -31,17 +31,17 @@ const generate_quick_response_response = async (access_token: string): Promise<Q
           email: 'admin@yoozoo.com',
           first_name: 'Youzu',
           host: {
-            mail: config.HOST_EMAIL
+            mail: config.HOST_EMAIL,
           },
           last_name: 'Admin',
           phone: '99999999',
           tenant_floor: '9;Front;NorthTower',
           tenant_id: 'cn=Youzu -Singapore- Pte Ltd,ou=Tenants,cn=Alice,o=Boustead,dc=getronettes,dc=com',
           tenant_name: 'Youzu -Singapore- Pte Ltd',
-          type: 'VISITOR_TYPE_VISITOR'
-        }
-      ]
-    })
+          type: 'VISITOR_TYPE_VISITOR',
+        },
+      ],
+    }),
   })
 
   return qr_request.json() as Promise<QRResponse>

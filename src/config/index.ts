@@ -4,5 +4,5 @@ import { env } from 'process'
 
 export const config = cleanEnv(env, {
   HOST_URL: url(),
-  HOST_EMAIL: email()
+  HOST_EMAIL: email(),
 })
