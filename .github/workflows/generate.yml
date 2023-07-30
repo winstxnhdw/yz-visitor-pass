@@ -44,7 +44,7 @@ jobs:
           REPOSITORY_NAME: ${{ github.event.repository.name }}
         run: |
           sed -i "$(grep -n -m 1 'Go to previous QR Code' README.md | cut -d: -f1)s,/tree/[^\"]*,/tree/$(git rev-parse HEAD)#$REPOSITORY_NAME," README.md
-          curl -s -L https://github.com/$GITHUB_REPOSITORY_OWNER/$REPOSITORY_NAME/releases/download/latest/index.js | node
+          curl -sL https://github.com/$GITHUB_REPOSITORY_OWNER/$REPOSITORY_NAME/releases/download/latest/index.js | node
           git add resources/qr_code.svg README.md
           git commit -m "chore(resources): update QR code"
           git push
