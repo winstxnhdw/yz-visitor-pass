@@ -7,7 +7,7 @@
 [![CodeQL](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/winstxnhdw/yz-visitor-pass/actions/workflows/github-code-scanning/codeql)
 
 <p align="center">
-    <b><a href="https://github.com/winstxnhdw/yz-visitor-pass/tree/fbfa137ada2e5715cfaa4e7dc10d79d70ff191db#yz-visitor-pass">Go to previous QR Code</a></b>
+    <b><a href="https://github.com/winstxnhdw/yz-visitor-pass/tree/c4249ca258cb95a0e8b5727189d47f3ef6ebe63b#yz-visitor-pass">Go to previous QR Code</a></b>
 </p>
 
 <div align="center">
