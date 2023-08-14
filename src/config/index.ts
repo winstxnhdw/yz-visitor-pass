@@ -1,8 +1,7 @@
 import 'dotenv/config'
 import { cleanEnv, email, url } from 'envalid'
-import { env } from 'process'
 
-export const config = cleanEnv(env, {
+export const config = cleanEnv(Bun.env, {
   HOST_URL: url(),
   HOST_EMAIL: email(),
 })

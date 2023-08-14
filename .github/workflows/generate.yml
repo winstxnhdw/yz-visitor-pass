@@ -27,10 +27,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: 20.2.0
+          bun-version: latest
 
       - name: Set Git config
         run: |
@@ -44,7 +44,8 @@ jobs:
           REPOSITORY_NAME: ${{ github.event.repository.name }}
         run: |
           sed -i "$(grep -n -m 1 'Go to previous QR Code' README.md | cut -d: -f1)s,/tree/[^\"]*,/tree/$(git rev-parse HEAD)#$REPOSITORY_NAME," README.md
-          curl -sL https://github.com/$GITHUB_REPOSITORY_OWNER/$REPOSITORY_NAME/releases/download/latest/index.js | node
+          curl -sLO https://github.com/$GITHUB_REPOSITORY_OWNER/$REPOSITORY_NAME/releases/download/latest/index.js
+          bun index.js
           git add resources/qr_code.svg README.md
           git commit -m "chore(resources): update QR code"
           git push

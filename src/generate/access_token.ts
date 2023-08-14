@@ -36,7 +36,7 @@ const generate_access_token_request = async (): Promise<AccessTokenResponse> => 
     }),
   })
 
-  return access_token_request.json() as Promise<AccessTokenResponse>
+  return access_token_request.json()
 }
 
 export const generate_access_token = async (): Promise<string> => {
